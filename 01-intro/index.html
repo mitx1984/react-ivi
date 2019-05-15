@@ -9,11 +9,16 @@
     <div id='big-container'>
         <div id="my-first-div"></div>
         <div id="my-second-div"></div>
+        <div id="my-third-div"></div>
+        <div id="my-fourth-div"></div>
     </div>
 
     <!-- Load React things -->
     <script src="https://unpkg.com/react@16.3.1/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.production.min.js"></script>
+
+    <!-- Load Babel (in order to transpile JSX to React) -->
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 
     <!-- Using native React -->
     <script type="text/javascript">
@@ -21,13 +26,14 @@
         const newElement = React.createElement(
             'div', {
                 className: 'container',
-                id: 'container-inside-container'
-            },
-            '\n - This is a new div inside my-first-div'
+                id: 'pure-react-container',
+                children: [
+                    '-> One children here <-',
+                    '-> Another children here <-'
+                ]
+            }
         )
-
         ReactDOM.render(newElement, existingDivElement)
-
         console.log(element)
     </script>
 
@@ -35,11 +41,44 @@
     <script type="text/javascript">
         const selectedElement = document.getElementById('my-second-div', )
         const newElemento = document.createElement('div')
-        newElemento.textContent = '- This is a new div inside my-second-div'
+        newElemento.textContent = '<<This is a div created with plain js>>'
         newElemento.className = 'container'
-        newElemento.id = 'container-inside-other-container'
+        newElemento.id = 'plain-js-container'
         selectedElement.appendChild(newElemento)
         console.log(newElemento);
+    </script>
+
+    <!-- Using React's JSX -->
+    <script type="text/babel">
+    function formatName(user) {
+        return 'Hi ' + user.firstName + ' ' + user.lastName + '!';
+    }
+    const user = {
+        firstName: 'Mitx',
+        lastName: 'López'
+    };
+    const element = (
+        <h1>{formatName(user)}</h1>
+    );
+    ReactDOM.render(
+        element,
+        document.getElementById('my-third-div')
+    );
+    </script>
+
+    <!-- Using a funcion as a custom element with JSX-->
+    <script type="text/babel">
+        const miguelili = (props) => <div id={props.id}>{props.children}</div>
+        const element = (
+            <div className="container">
+                <miguelili id="custom-element-a" children='Ei fadafaca ' />
+                <miguelili id="custom-element-b" children='Miguel Rules' />
+            </div>
+        )
+        ReactDOM.render(
+            element,
+            document.getElementById('my-fourth-div')
+        );
     </script>
 </body>
 
