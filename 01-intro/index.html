@@ -1,36 +1,45 @@
 <html>
 
 <head>
-    <title>Beginner's Guide to React</title>
+    <title>A little intro to React</title>
     <meta charset="UTF-8" />
 </head>
 
 <body>
-    <div id="root"></div>
-    <div id="root2"></div>
+    <div id='big-container'>
+        <div id="my-first-div"></div>
+        <div id="my-second-div"></div>
+    </div>
+
+    <!-- Load React things -->
     <script src="https://unpkg.com/react@16.3.1/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.production.min.js"></script>
 
+    <!-- Using native React -->
     <script type="text/javascript">
-        const rootElement = document.getElementById('root')
-        const element = React.createElement(
+        const existingDivElement = document.getElementById('my-first-div')
+        const newElement = React.createElement(
             'div', {
-                className: 'container'
+                className: 'container',
+                id: 'container-inside-container'
             },
-            'Hello World',
-            'Goodbye World'
+            '\n - This is a new div inside my-first-div'
         )
-        ReactDOM.render(element, rootElement)
+
+        ReactDOM.render(newElement, existingDivElement)
 
         console.log(element)
     </script>
+
+    <!-- Using plain javascript -->
     <script type="text/javascript">
-        const rootElemento = document.getElementById('root2', )
-        const elemento = document.createElement('div')
-        elemento.textContent = 'Hello world 8========D'
-        elemento.className = 'container'
-        rootElemento.appendChild(elemento)
-        console.log(elemento);
+        const selectedElement = document.getElementById('my-second-div', )
+        const newElemento = document.createElement('div')
+        newElemento.textContent = '- This is a new div inside my-second-div'
+        newElemento.className = 'container'
+        newElemento.id = 'container-inside-other-container'
+        selectedElement.appendChild(newElemento)
+        console.log(newElemento);
     </script>
 </body>
 
